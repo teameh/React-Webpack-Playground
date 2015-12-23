@@ -25,7 +25,8 @@ module.exports = {
       './index.js'
     ]
   },
-  devtool: 'cheap-module-source-map',
+  devtool: 'source-map',
+  // devtool: 'inline-source-map',
   debug: true,
   devServer: devServer,
   context: path.resolve(__dirname, './src'),
@@ -35,7 +36,7 @@ module.exports = {
     publicPath: devServer.publicPath
   },
   plugins: [
-    new Clean('build'),
+    new Clean('builds'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.OldWatchingPlugin(),
@@ -55,6 +56,10 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style','css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass')
+
+        // loader: ExtractTextPlugin.extract('style-loader','css-loader?sourceMap!sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true') }
+
+        // loader: ExtractTextPlugin.extract('style','css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true')
       }
     ]
   },
